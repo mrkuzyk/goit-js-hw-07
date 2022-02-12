@@ -1,8 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-const galleryEl = document.querySelector('.gallery');
-console.log(galleryEl);
+const galleryEl = document.querySelector('div.gallery');
 
 // cтворюю розмітку з вхідного масиву
 const makePreviewImageGallery = ({preview, original, description }) => {
@@ -25,3 +24,19 @@ const makePreviewImageGallery = ({preview, original, description }) => {
 //? galleryEl.innerHTML = elements;
 
 galleryEl.innerHTML = galleryItems.map(makePreviewImageGallery).join('');
+
+const onModalOriginalImage = (e) => {
+    event.preventDefault();
+
+    if (e.target.nodeName !== 'IMG') {
+        return;
+    };
+
+    const instance = basicLightbox.create(`
+    <img src="${e.target.dataset.source}" width="800" height="600">
+    `)
+
+    instance.show()
+}
+
+galleryEl.addEventListener('click', onModalOriginalImage);
