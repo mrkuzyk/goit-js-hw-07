@@ -1,7 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-const galleryEl = document.querySelector('div.gallery');
+const galleryEl = document.querySelector('ul.gallery');
 
 //? cтворюю розмітку з вхідного масиву
 const makePreviewImageGallery = ({preview, original, description }) => {
@@ -16,20 +16,8 @@ const makePreviewImageGallery = ({preview, original, description }) => {
 
 galleryEl.innerHTML = galleryItems.map(makePreviewImageGallery).join('');
 
-galleryEl.addEventListener('click', onModalOriginalImage); //? слухач подій на клік і відкриття модалки
-
-
-function onModalOriginalImage (e) {
-    e.preventDefault(); //? відключення дефолтного переходу по силці
-
-    //? перевірка на натискання по "імґ", якщо ні то нічого не буде
-    if (e.target.nodeName !== 'IMG') {
-        return;
-    };
-
-    //? підключена бібліотека на модалку
-    var lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt', //? змінено текст щоб брався з "альт"
-        captionDelay: 250, //? затримка появи тексту 250 мс
-    });   
-}
+//? підключена бібліотека на модалку
+var lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt', //? змінено текст щоб брався з "альт"
+    captionDelay: 250, //? затримка появи тексту 250 мс
+});
